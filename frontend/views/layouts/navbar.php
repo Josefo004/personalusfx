@@ -27,8 +27,7 @@ use yii\helpers\Html;
         </li>
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <img src="<?=$assetDir?>/img/usuarios/<?=rtrim(Yii::$app->user->identity->CodigoUsuario)?>.png" class="user-image img-circle elevation-2"
-                     alt="Imagen Usuario">
+                <img src="<?=$assetDir?>/img/usuarios/user.png" alt="Imagen Usuario" class="user-image img-circle elevation-2">
                 <span class="d-none d-md-inline"><?= ucwords( strtolower (Yii::$app->user->identity->CodigoUsuario)) ?></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">

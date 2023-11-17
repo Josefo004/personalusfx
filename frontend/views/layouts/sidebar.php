@@ -30,7 +30,7 @@
                         [
                             'label' => 'Filiacion',
                             'icon' => 'th',
-                            'badge' => '<span class="right badge badge-info">3</span>',
+                            'badge' => '<span class="right badge badge-info">5</span>',
                             'items' => [
                                 ['label' => 'Personas', 'url' => ['/Filiacion/personas/index'], 'iconStyle' => 'far'],
                                 ['label' => 'Funcionarios', 'url' => ['/Filiacion/trabajadores/index'], 'iconStyle' => 'far'],
@@ -59,7 +59,7 @@
                         [
                             'label' => 'Planillas',
                             'icon' => 'th',
-                            'badge' => '<span class="right badge badge-info">3</span>',
+                            'badge' => '<span class="right badge badge-info">1</span>',
                             'items' => [
                                 ['label' => 'Aportes de Ley ', 'url' => ['/Planillas/aportes-ley/index'], 'iconStyle' => 'far'],
 
