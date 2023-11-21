@@ -22,4 +22,14 @@ class AportesDao {
         }
         return $aportes;
     }
+
+    static public function contarAportes(){
+        $re=0;
+        $dbRRHH = Yii::$app->db;
+        $consulta = "SELECT count(*) as total FROM AportesLey;";
+        $instruccion = $dbRRHH->createCommand($consulta);
+        $lector = $instruccion->query();
+        $re = $lector->count();
+        return $re;
+    }
 }
