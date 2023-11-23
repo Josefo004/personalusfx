@@ -15,32 +15,37 @@ class AportesLeyController extends Controller {
     public function actionListarAportes(){
         if (\Yii::$app->request->isAjax && \Yii::$app->request->isPost) {
 
-            $aportes = AportesDao::listarAportes();    
+            $aportes = AportesDao::listarAportes();
+            //$datosJson = json_encode($aportes);
 
             $datosJson = '{"data": [';
             $cantidad = count($aportes);
             for ($i = 0; $i < $cantidad; $i++) {
 
-                $colorEstado = $aportes[$i]->CodigoEstado == 'V' ? "btn-success" : "btn-danger";
+                $colorEstado = $aportes[$i]->codigoEstado == 'V' ? "btn-success" : "btn-danger";
                 $textoEstado = $aportes[$i]->NombreEstado;
-                $estadoAporte = $aportes[$i]->CodigoEstado;
-                $estado = "<button class='btn " . $colorEstado . " btn-xs btnActivar' estado='" . $estadoAporte . "' codigo='" . $aportes[$i]->CodigoAporteLey . "'>" . $textoEstado . "</button>";
-                $acciones = "<button class='btn btn-warning btn-sm btnEditarAporte' codigo='" . $aportes[$i]->CodigoAporteLey . "' data-toggle='modal' data-target='#modalActualizarAporte'><i class='fa fa-pen'></i> Editar</button>";
+                $estadoAporte = $aportes[$i]->codigoEstado;
+                $estado = "<button class='btn " . $colorEstado . " btn-xs btnActivar' estado='" . $estadoAporte . "' codigo='" . $aportes[$i]->codigoAporteLey . "'>" . $textoEstado . "</button>";
+                $acciones = "<button class='btn btn-warning btn-sm btnEditarAporte' codigo='" . $aportes[$i]->codigoAporteLey . "' data-toggle='modal' data-target='#modalActualizarAporte'><i class='fa fa-pen'></i> Editar</button>";
                 if ($i == $cantidad - 1) {
                     $datosJson .= '[
 					 	"' . ($i + 1) . '",
-					 	"' . $aportes[$i]->NombreAporteLey . '",
-                        "' . $aportes[$i]->TipoAporte . '",
-                        "' . $aportes[$i]->Porcentaje . ' % ",
+					 	"' . $aportes[$i]->nombreAporteLey . '",
+                        "' . $aportes[$i]->tipoAporte . '",
+                        "' . $aportes[$i]->porcentaje . ' % ",
+                        "' . $aportes[$i]->fechaInicio . '",
+                        "' . $aportes[$i]->fechaFin . '",
                         "' . $estado . '",				      	
                         "' . $acciones . '"
   			    ]';
                 } else {
                     $datosJson .= '[
                         "' . ($i + 1) . '",
-					 	"' . $aportes[$i]->NombreAporteLey . '",
-                        "' . $aportes[$i]->TipoAporte . '",
-                        "' . $aportes[$i]->Porcentaje . ' %",
+                        "' . $aportes[$i]->nombreAporteLey . '",
+                        "' . $aportes[$i]->tipoAporte . '",
+                        "' . $aportes[$i]->porcentaje . ' % ",
+                        "' . $aportes[$i]->fechaInicio . '",
+                        "' . $aportes[$i]->fechaFin . '",
                         "' . $estado . '",				      	
                         "' . $acciones . '"
   			    ],';
@@ -62,9 +67,9 @@ class AportesLeyController extends Controller {
             if (isset($_POST["codigoactivar"]) && isset($_POST["estadoactivar"])) {
                 $aporte = Aporte::findOne($_POST["codigoactivar"]);
                 if ($_POST["estadoactivar"] == "V") {
-                    $aporte->CodigoEstado = "C";
+                    $aporte->codigoEstado = "C";
                 } else {
-                    $aporte->CodigoEstado = "V";
+                    $aporte->codigoEstado = "V";
                 }
                 $aporte->save();
                 return "ok";
@@ -97,18 +102,20 @@ class AportesLeyController extends Controller {
                 $cod = $_POST["codigoAporteLeyactualizar"];
                 if ($cod==0) {
                     $aporte = new Aporte();
-                    $aportes = Aporte::find()->count();
-                    $aporte->CodigoAporteLey = $aportes+1;
-                    $aporte->CodigoUsuario = "LNN";
+                    // $aportes = Aporte::find()->count();
+                    // $aporte->CodigoAporteLey = $aportes+1;
                 } else {
                     $aporte = Aporte::findOne($_POST["codigoAporteLeyactualizar"]);
                 }
-                $aporte->NombreAporteLey = strtoupper($_POST["nombreAporteLeyactualizar"]);
-                $aporte->TipoAporte = $_POST["tipoAporteactualizar"];
-                $aporte->Porcentaje = $_POST["porcentajeactualizar"];
-                $aporte->MontoSalario = $_POST["montoSalarioactualizar"];
-                $aporte->Observaciones = strtoupper($_POST["observacionesactualizar"]);
-                $aporte->CodigoEstado = $_POST["codigoEstadoactualizar"];
+                $aporte->nombreAporteLey = strtoupper($_POST["nombreAporteLeyactualizar"]);
+                $aporte->tipoAporte = $_POST["tipoAporteactualizar"];
+                $aporte->porcentaje = $_POST["porcentajeactualizar"];
+                $aporte->montoSalario = $_POST["montoSalarioactualizar"];
+                $aporte->observaciones = strtoupper($_POST["observacionesactualizar"]);
+                $aporte->fechaInicio = $_POST["fechaInicioactualizar"];
+                $aporte->fechaFin = $_POST["fechaFinactualizar"];
+                $aporte->codigoEstado = $_POST["codigoEstadoactualizar"];
+                $aporte->codigoUsuario = Yii::$app->user->identity->CodigoUsuario;
                 $aporte->save();
                 return "ok";
             } else {

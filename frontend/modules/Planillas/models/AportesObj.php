@@ -6,16 +6,18 @@ use yii\base\Model;
 
 class AportesObj extends Model
 {
-    private $CodigoAporteLey;
-    private $NombreAporteLey;
-    private $TipoAporte;
-    private $Porcentaje;
-    private $MontoSalario;
-    private $Observaciones;
-    private $CodigoEstado;
+    private $codigoAporteLey;
+    private $nombreAporteLey;
+    private $tipoAporte;
+    private $porcentaje;
+    private $montoSalario;
+    private $observaciones;
+    private $fechaInicio;
+    private $fechaFin;
+    private $codigoEstado;
     private $NombreEstado;
-    private $FechaHoraRegistro;
-    private $CodigoUsuario;
+    private $fechaRegistro;
+    private $codigoUsuario;
 
     public function __get($property)
     {

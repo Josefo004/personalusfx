@@ -3,19 +3,19 @@ namespace app\modules\Planillas\models;
 
 use yii\db\ActiveRecord;
 
-class Aporte extends ActiveRecord{
+class Estado extends ActiveRecord{
 
     public static function tableName()
     {
-        return 'AportesLey';
+        return 'Estados';
     }
 
     /**
      * @return \yii\db\ActiveQuery
     */
 
-    public function getEstado(){
-        return $this->hasOne(Estado::className(),['CodigoEstado'=>'codigoEstado'] );
+    public function getAportes(){
+        return $this->hasMany(Aporte::className(),['CodigoEstado'=>'codigoEstado']);
     }
 
 }

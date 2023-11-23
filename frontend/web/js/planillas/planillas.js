@@ -104,15 +104,17 @@ $(document).ready(function () {
             dataType: "json",
             success: function (respuesta) {
                 console.log(respuesta);
-                $("#codigoAporteLeyUpd").val(respuesta["CodigoAporteLey"]);
-                $("#nombreAporteLeyUpd").val(respuesta["NombreAporteLey"]);
-                $("#tipoAporteUpd").val(respuesta["TipoAporte"]);
-                $("#porcentajeUpd").val(respuesta["Porcentaje"]);
-                $("#montoSalarioUpd").val(respuesta["MontoSalario"]);
-                $("#observacionesUpd").val(respuesta["Observaciones"]);
-                $("#codigoEstadoUpd").val(respuesta["CodigoEstado"]);
-                $("#fechaHoraRegistroUpd").val(respuesta["FechaHoraRegistro"]);
-                $("#codigoUsuarioUpd").val(respuesta["CodigoUsuario"]);
+                $("#codigoAporteLeyUpd").val(respuesta["codigoAporteLey"]);
+                $("#nombreAporteLeyUpd").val(respuesta["nombreAporteLey"]);
+                $("#tipoAporteUpd").val(respuesta["tipoAporte"]);
+                $("#porcentajeUpd").val(respuesta["porcentaje"]);
+                $("#montoSalarioUpd").val(respuesta["montoSalario"]);
+                $("#fechaInicioUpd").val(respuesta["fechaInicio"]);
+                $("#fechaFinUpd").val(respuesta["fechaFin"]);
+                $("#observacionesUpd").val(respuesta["observaciones"]);
+                $("#codigoEstadoUpd").val(respuesta["codigoEstado"]);
+                $("#fechaHoraRegistroUpd").val(respuesta["fechaRegistro"]);
+                $("#codigoUsuarioUpd").val(respuesta["codigoUsuario"]);
             },
             error: function (respuesta) {
                 Swal.fire({
@@ -139,6 +141,8 @@ $(document).ready(function () {
         let tipoAporte = $("#tipoAporteUpd").val();
         let porcentaje = $("#porcentajeUpd").val();
         let montoSalario = $("#montoSalarioUpd").val();
+        let fechaInicio = $("#fechaInicioUpd").val();
+        let fechaFin = $("#fechaFinUpd").val();
         let observaciones = $("#observacionesUpd").val();
         let codigoEstado = $("#codigoEstadoUpd").val();
         let fechaHoraRegistro = $("#fechaHoraRegistroUpd").val();
@@ -151,6 +155,8 @@ $(document).ready(function () {
         datos.append("porcentajeactualizar", porcentaje);
         datos.append("montoSalarioactualizar", montoSalario);
         datos.append("observacionesactualizar", observaciones);
+        datos.append("fechaInicioactualizar", fechaInicio);
+        datos.append("fechaFinactualizar", fechaFin);
         datos.append("codigoEstadoactualizar", codigoEstado);
         datos.append("fechaHoraRegistroactualizar", fechaHoraRegistro);
         datos.append("codigoUsuarioactualizar", codigoUsuario);
@@ -204,6 +210,8 @@ $(document).ready(function () {
         $("#tipoAporteUpd").val("");
         $("#porcentajeUpd").val("0");
         $("#montoSalarioUpd").val("0");
+        $("#fechaInicioUpd").val("");
+        $("#fechaFinUpd").val("");
         $("#observacionesUpd").val("");
         $("#codigoEstadoUpd").val("V");
         $("#fechaHoraRegistroUpd").val("");
