@@ -1,0 +1,10 @@
+version: "3"
+services:
+  php:
+    image: tamuarchi/yii2-mssql:latest
+    volumes:
+      - ./frontend:/app
+      - ./vendor:/app/web/vendor
+      - ./common:/app/web/common
+    ports:
+      - "4055:80"
